@@ -1,6 +1,5 @@
-# devmuch sre challenge
 
-## Instruções Deployment local
+## Local deployment instruction
 
 
 Install docker + docker compose
