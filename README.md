@@ -30,4 +30,4 @@ https://docs.docker.com/compose/install/
 - Access the application using the Server IP on browser, or just localhost(in case you installed locally).
 - To check the inserts on the database, run:
 
-   `docker exec mysql mysql -pdeliverymuch -e 'SELECT * FROM preferences.preferences';`
+   `docker exec mysql mysql -pdefpass -e 'SELECT * FROM preferences.preferences';`
