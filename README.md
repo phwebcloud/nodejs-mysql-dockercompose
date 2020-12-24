@@ -22,13 +22,13 @@ https://docs.docker.com/compose/install/
 
 - After installing docker and docker compose, run the comand above inside the root directory:
 
-`docker-compose up --build -d`
+   `docker-compose up --build -d`
 
 - Check created containers:
 
-`docker ps`
+   `docker ps`
 
 - Access the application using the Server IP on browser, or just localhost(in case you installed locally).
 - To check the inserts on the database, run:
 
-`docker exec mysql mysql -pdeliverymuch -e 'SELECT * FROM preferences.preferences';`
+   `docker exec mysql mysql -pdeliverymuch -e 'SELECT * FROM preferences.preferences';`
