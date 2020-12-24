@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+   front-app:
+      container_name: "frontend"
+      restart: always
+      build: ./front
+      volumes:
+         - ./front/:/usr/src/app/
+         - /usr/src/app/node_modules
+      ports:
+         - 80:3000
+      environment:
+         - SERVICE_PORT=3000
+         - BACKEND_HOST=back-app
+         - BACKEND_PORT=3000
+      depends_on:
+         - back-app
+      networks:
+         - frontend-backend
+
+   back-app:
+      container_name: "backend"
+      restart: always
+      build: ./back
+      volumes:
+         - ./back/:/usr/src/app/
+         - /usr/src/app/node_modules
+      environment:
+         - SERVICE_PORT=3000
+         - MYSQL_HOST=mysql-db
+         - MYSQL_USER=root
+         - MYSQL_PASSWORD=defpass
+         - MYSQL_DB=preferences
+      depends_on:
+         - mysql-db
+      networks:
+         - backend-mysql
+         - frontend-backend
+
+   mysql-db:
+      container_name: "mysql"
+      restart: always
+      image: mysql:5.7
+      command: --default-authentication-plugin=mysql_native_password
+      volumes:
+         - ./mysql/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      environment:
+         - MYSQL_ROOT_PASSWORD=defpass
+         - MYSQL_DATABASE=db1
+         - MYSQL_USER=defuser
+         - MYSQL_PASSWORD=defpass
+      networks:
+         - backend-mysql
+
+networks:
+   backend-mysql:
+     driver: bridge
+   frontend-backend:
+     driver: bridge
